@@ -141,10 +141,10 @@ def visualize_knowledge_graph():
         else:
             G.add_node(message.content, color='red')
     
-    pos = nx.spring_layout(G)  # use spring layout for better spacing
+    pos = nx.spring_layout(G)  
     colors = [node[1]['color'] for node in G.nodes(data=True)]
     
-    plt.figure(figsize=(10, 8))  # increase figure size
+    plt.figure(figsize=(10, 8))  
     nx.draw(G, pos, node_color=colors, with_labels=True, font_size=10, node_size=3000, font_weight='bold')
     st.pyplot(plt.gcf())
 
@@ -254,7 +254,7 @@ else:
                 response, sentiment, subjectivity = get_response(user_query, st.session_state.vector_store, bot_tone, response_length)
                 st.session_state.chat_history.append(HumanMessage(content=f"{user_query} (Sentiment: {sentiment}, Subjectivity: {subjectivity})"))
                 st.session_state.chat_history.append(AIMessage(content=response))
-                speak_text(response)  # Voice guidance
+                speak_text(response)  
             except Exception as e:
                 st.error(f"An error occurred: {e}")
         
@@ -263,7 +263,7 @@ else:
             if isinstance(message, AIMessage):
                 with st.chat_message("AI"):
                     st.write(message.content)
-                    speak_text(message.content)  # Read AI message aloud
+                    speak_text(message.content)  
             elif isinstance(message, HumanMessage):
                 with st.chat_message("Human"):
                     st.write(message.content)
